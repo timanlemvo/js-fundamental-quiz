@@ -10,6 +10,7 @@ Timed mulitiple-choice quiz in the subject of JavaScript Fundamentals that will 
 
 ## Website
 
+## Screenshot
 
 ## Contribution
 Made by Tima Nlemvo
