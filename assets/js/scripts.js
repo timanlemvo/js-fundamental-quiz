@@ -1,32 +1,11 @@
-function startQuiz(){
-    gameoverDiv.style.display = "none";
-    startQuizDiv.style.display = "none";
-    generateQuizQuestion();
-
-// Timer
-    timerInterval = setInterval(function() {
-        timeLeft--;
-        quizTimer.textContent = "Time left: " + timeLeft;
-    
-        if(timeLeft === 0) {
-          clearInterval(timerInterval);
-          showScore();
-        }
-      }, 1000);
-    quizBody.style.display = "block";
-}
-var startQuizButton = document.getElementById("startbtn");
-var startQuizDiv = document.getElementById("startpage");
-var buttonA = document.getElementById("a");
-var buttonB = document.getElementById("b");
-var buttonC = document.getElementById("c");
-var buttonD = document.getElementById("d");
 var quizBody = document.getElementById("quiz");
 var resultsEl = document.getElementById("result");
 var finalScoreEl = document.getElementById("finalScore");
 var gameoverDiv = document.getElementById("gameover");
 var questionsEl = document.getElementById("questions");
 var quizTimer = document.getElementById("timer");
+var startQuizButton = document.getElementById("startbtn");
+var startQuizDiv = document.getElementById("startpage");
 var highscoreContainer = document.getElementById("highscoreContainer");
 var highscoreDiv = document.getElementById("high-scorePage");
 var highscoreInputName = document.getElementById("initials");
@@ -34,12 +13,10 @@ var highscoreDisplayName = document.getElementById("highscore-initials");
 var endGameBtns = document.getElementById("endGameBtns");
 var submitScoreBtn = document.getElementById("submitScore");
 var highscoreDisplayScore = document.getElementById("highscore-score");
-var finalQuestionIndex = quizQuestions.length;
-var currentQuestionIndex = 0;
-var timeLeft = 76;
-var timerInterval;
-var score = 0;
-var correct;
+var buttonA = document.getElementById("a");
+var buttonB = document.getElementById("b");
+var buttonC = document.getElementById("c");
+var buttonD = document.getElementById("d");
 
 var quizQuestions = [{
     question: "When is localStorage data cleared?",
@@ -78,6 +55,13 @@ var quizQuestions = [{
     correctAnswer: "c"},
 ];
 
+var finalQuestionIndex = quizQuestions.length;
+var currentQuestionIndex = 0;
+var timeLeft = 76;
+var timerInterval;
+var score = 0;
+var correct;
+
 function generateQuizQuestion(){
     gameoverDiv.style.display = "none";
     if (currentQuestionIndex === finalQuestionIndex){
@@ -90,13 +74,32 @@ function generateQuizQuestion(){
     buttonC.innerHTML = currentQuestion.choiceC;
     buttonD.innerHTML = currentQuestion.choiceD;
 };
+
+function startQuiz(){
+    gameoverDiv.style.display = "none";
+    startQuizDiv.style.display = "none";
+    generateQuizQuestion();
+
+// Timer
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        quizTimer.textContent = "Time left: " + timeLeft;
+    
+        if(timeLeft === 0) {
+          clearInterval(timerInterval);
+          showScore();
+        }
+      }, 1000);
+    quizBody.style.display = "block";
+}
+
 function showScore(){
     quizBody.style.display = "none"
     gameoverDiv.style.display = "flex";
     clearInterval(timerInterval);
     highscoreInputName.value = "";
     finalScoreEl.innerHTML = "You got " + score + " out of " + quizQuestions.length + " correct!";
-};
+}
 
 submitScoreBtn.addEventListener("click", function highscore(){
     
